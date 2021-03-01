@@ -21,7 +21,7 @@ button2 = KeyboardButton('Какая-то кнопка 2!')
 two_buttons = ReplyKeyboardMarkup()
 two_buttons.row(button1, button2)
 
-game_inline = [InlineKeyboardButton(game, callback_data=f'game {id_}')
+game_inline = [InlineKeyboardButton(game, callback_data=f'game {game} {id_}')
                for game, id_ in settings.GAME_AND_ID.items()]
 inline_games_button = InlineKeyboardMarkup()
 inline_games_button.add(*game_inline)
@@ -60,7 +60,7 @@ async def main(message: types.Message):
                          for quality in qualitys]
         inline_quality_button = InlineKeyboardMarkup()
         inline_quality_button.add(*qualitys_inline)
-        await message.answer('Выбирите качество предмета',
+        await message.answer(f'{msg}:  Выбирите качество предмета',
                              reply_markup=inline_quality_button)
     else:
         await message.answer('Может быть вы имели ввиду: /help')
@@ -68,23 +68,25 @@ async def main(message: types.Message):
 @dp.callback_query_handler(lambda c: c.data.startswith('game'))
 async def callback_game(callback_query: types.CallbackQuery):
     await bot.answer_callback_query(callback_query.id)
-    id_ = callback_query.data.split()[1]
+    id_ = callback_query.data.split()[2]
+    game = callback_query.data.split()[1]
     weapons = Parser.put_game_id(id_)
     weapon_inline = [InlineKeyboardButton(weapon, callback_data=f'weapon {weapon}')
                      for weapon in weapons]
     inline_weapon_button = InlineKeyboardMarkup()
     inline_weapon_button.add(*weapon_inline)
     await bot.send_message(callback_query.from_user.id,
-                           'Выбирите оружие:',
+                           f'{game}:  Выбирите оружие:',
                            reply_markup=inline_weapon_button)
 
 
 @dp.callback_query_handler(lambda c: c.data.startswith('weapon'))
 async def callback_weapon(callback_query: types.CallbackQuery):
+    weapon = callback_query.data.split()[1]
     user_data[callback_query.from_user.id] = 1
     await bot.answer_callback_query(callback_query.id)
     await bot.send_message(callback_query.from_user.id,
-                           'Введите название скина.')
+                           f'{weapon}:  Введите название скина.')
 
 
 if __name__ == '__main__':
