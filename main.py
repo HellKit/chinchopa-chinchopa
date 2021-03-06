@@ -32,6 +32,7 @@ async def send_instruction(message: types.Message):
     if message.from_user.id not in user_data.keys():
         user_data[message.from_user.id] = 0
     msg = message.text
+    print(user_data, msg)
     if not msg.startswith('/h'):
         await message.answer(f"Привет, держи кнопки для удобного пользования.\
                               \nИспользуйте {settings.COMMANDS[0]}",
@@ -47,6 +48,7 @@ async def send_which_buttons(message: types.Message):
 @dp.message_handler()
 async def main(message: types.Message):
     msg = message.text
+    print(user_data, msg)
     if msg == 'Выбрать игру!':
         await message.answer('Выбирите из возможных или укажите название.',
                              reply_markup=inline_games_button)

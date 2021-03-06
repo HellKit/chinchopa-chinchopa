@@ -1,8 +1,8 @@
 # TODO: Парсер
 
 def get_game_name_and_id():
-    games = ['CS:GO', 'RUST', 'DOTA2']
-    links = ['730', '252490', '570']
+    games = ['CS:GO']
+    links = ['730']
     games_with_id = {game: link for game, link in zip(games, links)}
     return games_with_id
 
