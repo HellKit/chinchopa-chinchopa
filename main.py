@@ -12,8 +12,8 @@ dp = Dispatcher(bot)
 STEAM_GAME = WorkshopSteam()
 GAME_AND_ID = STEAM_GAME.get_game_name_and_id()
 
-WEAPON_SKIN = []
-WEAPON_LIST = []
+WEAPON_SKIN = []  # Предмет с называнием для поиска
+WEAPON_LIST = []  # Список ссылок на найденный предмет
 ###################################################
 
 user_data = {}  # Пока что это заменяет базу данных
