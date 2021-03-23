@@ -7,6 +7,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+.idea
 .Python
 build/
 develop-eggs/
@@ -130,3 +131,8 @@ dmypy.json
 
 # API TOKEN
 Tokens.py
+
+
+# Any files
+main_test.py
+Parser/chromedriver.exe
