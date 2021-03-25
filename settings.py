@@ -1,5 +1,4 @@
 import Tokens
-from Parser.Parser import WorkshopSteam
 
 API_TOKEN = Tokens.TOKEN
 
