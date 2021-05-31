@@ -136,3 +136,4 @@ Tokens.py
 # Any files
 main_test.py
 Parser/chromedriver.exe
+User.db
